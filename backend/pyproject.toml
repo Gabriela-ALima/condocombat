@@ -3,6 +3,7 @@ name = "condocombat-api"
 version = "0.1.0"
 description = "ERP satírico para gerenciar fofocas, rixas e tretas de condomínio"
 requires-python = ">=3.12"
+
 dependencies = [
     "fastapi[standard]>=0.115.0",
     "uvicorn[standard]>=0.34.0",
@@ -25,25 +26,31 @@ dev = [
     "httpx>=0.28.0",
 ]
 
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-testpaths = ["__tests__"]
-
 [dependency-groups]
 dev = [
     "aiosqlite>=0.22.1",
     "httpx>=0.28.1",
     "pytest>=9.0.3",
     "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.1",
 ]
 
-# Ruff
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["__tests__"]
+
+
+# Configuração do Ruff
 [tool.ruff]
 line-length = 88
+target-version = "py312"
 
 [tool.ruff.lint]
 ignore = [
-    "B008",
-    "BLE001",
-    "F821"
+    "B008",    # FastAPI Depends() em parâmetros é padrão
+    "BLE001",  # Permite capturar Exception em WebSocket
+    "UP017",   # Mantém timezone.utc ao invés de datetime.UTC
 ]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
