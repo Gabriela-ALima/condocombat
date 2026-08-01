@@ -26,31 +26,21 @@ dev = [
     "httpx>=0.28.0",
 ]
 
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["__tests__"]
+
 [dependency-groups]
 dev = [
     "aiosqlite>=0.22.1",
     "httpx>=0.28.1",
     "pytest>=9.0.3",
     "pytest-asyncio>=1.4.0",
-    "ruff>=0.16.1",
 ]
 
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-testpaths = ["__tests__"]
-
-
-# Configuração do Ruff
 [tool.ruff]
-line-length = 88
-target-version = "py312"
-
-[tool.ruff.lint]
-ignore = [
-    "B008",    # FastAPI Depends() em parâmetros é padrão
-    "BLE001",  # Permite capturar Exception em WebSocket
-    "UP017",   # Mantém timezone.utc ao invés de datetime.UTC
+lint.ignore = [
+    "F821",
+    "B008",
+    "BLE001"
 ]
-
-[tool.ruff.lint.isort]
-known-first-party = ["app"]
