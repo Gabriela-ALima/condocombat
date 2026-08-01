@@ -36,3 +36,14 @@ dev = [
     "pytest>=9.0.3",
     "pytest-asyncio>=1.4.0",
 ]
+
+# Ruff
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+ignore = [
+    "B008",
+    "BLE001",
+    "F821"
+]
